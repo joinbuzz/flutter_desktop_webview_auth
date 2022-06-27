@@ -5,8 +5,9 @@ const _defaultSignInScope = 'https://www.googleapis.com/auth/plus.login';
 class GoogleSignInArgs extends ProviderArgs {
   final String clientId;
   final String scope;
-  final bool immediate;
   final String responseType;
+  final String accessType;
+  final String prompt;
 
   @override
   final String redirectUri;
@@ -21,8 +22,9 @@ class GoogleSignInArgs extends ProviderArgs {
     required this.clientId,
     required this.redirectUri,
     this.scope = _defaultSignInScope,
-    this.immediate = false,
     this.responseType = 'token id_token',
+    this.accessType = 'offline',
+    this.prompt = 'select_account consent',
   });
 
   @override
@@ -30,9 +32,10 @@ class GoogleSignInArgs extends ProviderArgs {
     return {
       'client_id': clientId,
       'scope': scope,
-      'immediate': immediate.toString(),
       'response_type': responseType,
       'redirect_uri': redirectUri,
+      'access_type': accessType,
+      'prompt': prompt,
     };
   }
 }
